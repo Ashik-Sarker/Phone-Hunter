@@ -5,7 +5,8 @@ const search_product = () => {
     const input_value = input_field.value;
     if (input_value.length > 0 && input_value !== ' ' && input_value.includes('  ') === false) {
         input_field.value = '';
-        parent = document.getElementById('parent').innerHTML = '';
+        document.getElementById('parent').innerHTML = '';
+        document.getElementById('details-area').innerHTML = '';
         const url = `https://openapi.programming-hero.com/api/phones?search=${input_value}`;
 
         fetch(url)
@@ -23,23 +24,30 @@ const search_product = () => {
 
 const getPhone = data => {
     const parent = document.getElementById('parent');
+    let count = 20;
     if (data.length !== 0) {
         data.forEach(item => {
-            const div = document.createElement('div');
-            div.classList.add('col');
-            div.innerHTML =
-                `
-            <div class="card h-100 shadow">
-                <img class="p-5" src="${item.image}" class="card-img-top" alt="${item.phone_name}">
-                <div class="card-body text-center">
-                    <h5 class="card-title">${item.phone_name}</h5>
-                    <p class="card-text">${item.brand}</p>
+            if (count > 0) {
+                count = count - 1;
+                const div = document.createElement('div');
+                div.classList.add('col');
+                div.innerHTML =
+                    `
+                    <div class="card h-100 shadow">
+                        <img class="p-5" src="${item.image}" class="card-img-top" alt="${item.phone_name}">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">${item.phone_name}</h5>
+                            <p class="card-text">${item.brand}</p>
 
-                    <button onclick="product_details('${item.slug}')" id="details_button"  class="display-flex justify-content-center bg-primary text-white px-5 py-2 rounded border-0 ">More Details</button>
-                </div>
-            </div>
-        `;
-            parent.appendChild(div);
+                            <button onclick="product_details('${item.slug}')" id="details_button"  class="display-flex justify-content-center bg-primary text-white px-5 py-2 rounded border-0 ">More Details</button>
+                        </div>
+                    </div>
+                    `;
+                parent.appendChild(div);
+            }
+            else {
+                return 0;
+            }
         }); //ending forEach
     }
     else {
@@ -63,6 +71,7 @@ const product_details = (item) => {
 const getDetails = data => {
     // console.log(data.mainFeatures);
     const parent = document.getElementById('details-area');
+    parent.innerHTML = '';
     const div = document.createElement('div');
     div.classList.add('card');
     div.classList.add('mb-3');
@@ -76,9 +85,9 @@ const getDetails = data => {
         }
     }
     div.innerHTML = `
-        <div class="row g-0 m-3">
+        <div class="row g-0 m-5">
             <div class="col-md-4">
-                <img src="${data.image}" class="img-fluid rounded-start" alt="...">
+                <img src="${data.image}" class="img-fluid rounded-start mt-5" alt="...">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
