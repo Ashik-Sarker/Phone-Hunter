@@ -61,5 +61,43 @@ const product_details = (item) => {
 }
 
 const getDetails = data => {
-    console.log(data.brand);
+    // console.log(data.mainFeatures);
+    const parent = document.getElementById('details-area');
+    const div = document.createElement('div');
+    div.classList.add('card');
+    div.classList.add('mb-3');
+    div.style.maxWidth = '540px;';
+    const isRelease = () => {
+        if (data.releaseDate == '') {
+            return 'No release date found';
+        }
+        else {
+           return data.releaseDate;
+        }
+    }
+    div.innerHTML = `
+        <div class="row g-0 m-3">
+            <div class="col-md-4">
+                <img src="${data.image}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">${data.name}</h5>
+                    <p class="card-text">${isRelease()}</p>
+                    <p class="card-text"><small class="text-muted">Main Features
+                    <li>${data.mainFeatures.displaySize}</li>
+                    <li>${data.mainFeatures.memory}</li>
+                    <li>${data.mainFeatures.storage}</li>
+                    <li>${data.mainFeatures.sensors[0]}</li>
+                    <li>${data.mainFeatures.sensors[1]}</li>
+                    <li>${data.mainFeatures.sensors[2]}</li>
+                    <li>${data.mainFeatures.sensors[3]}</li>
+                    <li>${data.mainFeatures.sensors[4]}</li>
+                    <li>${data.mainFeatures.sensors[5]}</li>
+                    </small></p>
+                </div>
+            </div>
+        </div>
+    `
+    parent.appendChild(div);
 }
