@@ -17,6 +17,7 @@ const search_product = () => {
     }
     else {
         document.getElementById('spinner').style.display = 'none';
+        document.getElementById('details-area').innerHTML = '';
 
         document.getElementById('parent').innerHTML = 
         `
@@ -44,7 +45,7 @@ const getPhone = data => {
                             <h5 class="card-title">${item.phone_name}</h5>
                             <p class="card-text">${item.brand}</p>
 
-                            <button onclick="product_details('${item.slug}')" id="details_button"  class="display-flex justify-content-center bg-primary text-white px-5 py-2 rounded border-0 ">More Details</button>
+                            <button  onclick="product_details('${item.slug}')" id="details_button"  class="display-flex justify-content-center bg-primary text-white px-5 py-2 rounded border-0 ">More Details</button>
                         </div>
                     </div>
                     `;
@@ -58,7 +59,7 @@ const getPhone = data => {
     else {
         document.getElementById('parent').innerHTML =
             `
-            <h1 class="text-center w-100 text-danger">No Result Found</h1>
+            <h1 class="text-center w-100 text-danger">No Phone Found</h1>
         `
     }
     
@@ -100,9 +101,12 @@ const getDetails = data => {
                     <h5 class="card-title">${data.name}</h5>
                     <p class="card-text">${isRelease()}</p>
                     <p class="card-text"><small class="text-muted">Main Features
-                    <li>${data.mainFeatures.displaySize}</li>
-                    <li>${data.mainFeatures.memory}</li>
-                    <li>${data.mainFeatures.storage}</li>
+                    <li>Display: ${data.mainFeatures.displaySize}</li>
+                    <li>Memory: ${data.mainFeatures.memory}</li>
+                    <li>Storage: ${data.mainFeatures.storage}</li>
+                    </small></p>
+
+                    <p class="card-text"><small class="text-muted">Sensors
                     <li>${data.mainFeatures.sensors[0]}</li>
                     <li>${data.mainFeatures.sensors[1]}</li>
                     <li>${data.mainFeatures.sensors[2]}</li>
@@ -110,6 +114,16 @@ const getDetails = data => {
                     <li>${data.mainFeatures.sensors[4]}</li>
                     <li>${data.mainFeatures.sensors[5]}</li>
                     </small></p>
+
+                    <p class="card-text"><small class="text-muted">Others
+                    <li>Bluetooth: ${data.others.Bluetooth}</li>
+                    <li>GPS: ${data.others.GPS}</li>
+                    <li>NFC: ${data.others.NFC}</li>
+                    <li>Radio: ${data.others.Radio}</li>
+                    <li>USB: ${data.others.USB}</li>
+                    <li>WLAN: ${data.others.WLAN}</li>
+                    </small></p>
+
                 </div>
             </div>
         </div>
