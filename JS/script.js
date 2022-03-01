@@ -67,6 +67,7 @@ const getPhone = data => {
 
 // product_details Function start
 const product_details = (item) => {
+    console.log(item);
     const url = `https://openapi.programming-hero.com/api/phone/${item}`;
     // console.log(url);
     fetch(url)
@@ -75,7 +76,7 @@ const product_details = (item) => {
 }
 
 const getDetails = data => {
-    // console.log(data.mainFeatures);
+    console.log(data.mainFeatures);
     const parent = document.getElementById('details-area');
     parent.innerHTML = '';
     const div = document.createElement('div');
@@ -116,12 +117,12 @@ const getDetails = data => {
                     </small></p>
 
                     <p class="card-text"><small class="text-muted">Others
-                    <li>Bluetooth: ${data.others.Bluetooth}</li>
-                    <li>GPS: ${data.others.GPS}</li>
-                    <li>NFC: ${data.others.NFC}</li>
-                    <li>Radio: ${data.others.Radio}</li>
-                    <li>USB: ${data.others.USB}</li>
-                    <li>WLAN: ${data.others.WLAN}</li>
+                    <li>Bluetooth: ${data.others?.Bluetooth?? "No"}</li>
+                    <li>GPS: ${data.others?.GPS?? "Yes"}</li>
+                    <li>NFC: ${data.others?.NFC?? "No"}</li>
+                    <li>Radio: ${data.others?.Radio?? "No"}</li>
+                    <li>USB: ${data.others?.USB?? "Yes"}</li>
+                    <li>WLAN: ${data.others?.WLAN?? "Yes"}</li>
                     </small></p>
 
                 </div>
