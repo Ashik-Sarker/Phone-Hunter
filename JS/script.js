@@ -67,16 +67,13 @@ const getPhone = data => {
 
 // product_details Function start
 const product_details = (item) => {
-    console.log(item);
     const url = `https://openapi.programming-hero.com/api/phone/${item}`;
-    // console.log(url);
     fetch(url)
         .then(res => res.json())
         .then(data => getDetails(data.data))
 }
 
 const getDetails = data => {
-    console.log(data.mainFeatures);
     const parent = document.getElementById('details-area');
     parent.innerHTML = '';
     const div = document.createElement('div');
