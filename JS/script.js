@@ -1,8 +1,10 @@
 
 
 const search_product = () => {
+    // spinner
+    document.getElementById('spinner').style.display = 'block';
     const input_field = document.getElementById('input-field');
-    const input_value = input_field.value;
+    const input_value = input_field.value.toLowerCase();
     if (input_value.length > 0 && input_value !== ' ' && input_value.includes('  ') === false) {
         input_field.value = '';
         document.getElementById('parent').innerHTML = '';
@@ -14,6 +16,8 @@ const search_product = () => {
             .then(data => getPhone(data.data))
     }
     else {
+        document.getElementById('spinner').style.display = 'none';
+
         document.getElementById('parent').innerHTML = 
         `
             <h2 class="text-center w-100 text-danger">Please Search By Product Name</h2>
@@ -25,6 +29,7 @@ const search_product = () => {
 const getPhone = data => {
     const parent = document.getElementById('parent');
     let count = 20;
+    document.getElementById('spinner').style.display = 'none';
     if (data.length !== 0) {
         data.forEach(item => {
             if (count > 0) {
@@ -74,6 +79,7 @@ const getDetails = data => {
     parent.innerHTML = '';
     const div = document.createElement('div');
     div.classList.add('card');
+    div.classList.add('details');
     div.classList.add('mb-3');
     div.style.maxWidth = '540px;';
     const isRelease = () => {
